@@ -1,0 +1,19 @@
+name: helloworld-github-workflows
+
+on: [push]
+
+jobs:
+  job_id_example_build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Notifycheckoutsuccess
+        run: echo "checkout to branch @V4 successfully"
+
+      - name: Helloword message
+        run: echo "HelloWorld, I am learning Github action and CICD 06/12/2025. I hope it will help me in the future"
+      
+
