@@ -1,0 +1,44 @@
+name: test_and_build_work_flows_to_githubPages
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    test_and_build_react_app:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Nodejs
+              uses: actions/setup-node@v4
+              with:
+                node-version: 20
+                cache: 'npm'
+
+            - name: Install dependency
+              run: npm ci
+
+
+            - name: run test before build
+              run:  |
+                npm test
+                echo "test passed"
+
+            - name: build app
+              run: |
+                npm run build
+                echo "build passed"
+
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_dir: ./dist
+                publish_branch: gh-pages
+                commit_message: "Deployed by GitHub Actions to Github page - learn it 06/12/2025"
+                # Link deploy: https://Trungdev1611.github.io/CICD_github-actions-workflows/
+            

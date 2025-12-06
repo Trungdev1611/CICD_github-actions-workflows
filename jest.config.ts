@@ -1,15 +1,17 @@
 export default {
-    preset: 'ts-jest',
+    preset: 'ts-jest/presets/default-esm',
     testEnvironment: 'jest-environment-jsdom',
-    transform: {
-     '^.+\\.tsx?$': 'ts-jest',
-     // process `*.tsx` files with `ts-jest`
-    },
+    extensionsToTreatAsEsm: ['.ts', '.tsx'],
     moduleNameMapper: {
+        '^(\\.{1,2}/.*)\\.js$': '$1',
         "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-          "<rootDir>/mocks/fileMock.js",
-          "\\.(css|less|scss|sass)$": "identity-obj-proxy"
-
-  
-      },
-   };
+          "<rootDir>/src/test/__ mocks __/fileMock.js",
+        "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    },
+    transform: {
+        '^.+\\.tsx?$': ['ts-jest', {
+            useESM: true,
+        }],
+    },
+    setupFilesAfterEnv: ['<rootDir>/src/test/setupTests.ts'],
+};
