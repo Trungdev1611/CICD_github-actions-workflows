@@ -2,6 +2,11 @@ name: Hello World - Simple Test Workflow
 
 on: [push]
 
+# Thêm cấu hình concurrency để cancel workflow cũ khi có push mới
+concurrency:
+    group: hello-world-${{ github.ref }}
+    cancel-in-progress: true
+
 jobs:
   job_id_example_build:
     runs-on: ubuntu-latest
