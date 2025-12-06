@@ -1,4 +1,4 @@
-name: helloworld-github-workflows
+name: Hello World - Simple Test Workflow
 
 on: [push]
 

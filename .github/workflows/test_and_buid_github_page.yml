@@ -1,4 +1,4 @@
-name: test_and_build_work_flows_to_githubPages
+name: Test, Build & Deploy to GitHub Pages
 
 on:
     push:
