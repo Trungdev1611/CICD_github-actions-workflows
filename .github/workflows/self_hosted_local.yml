@@ -38,7 +38,7 @@ jobs:
 
             - name: Build Docker image
               run: |
-                docker build -t fe-app-CI-CD:latest -t fe-app-CI-CD:${{ github.sha }} .
+                docker build -t fe-app-ci-cd:latest -t fe-app-ci-cd:${{ github.sha }} .
                 echo "Docker image built successfully"
 
             - name: Stop and remove old container
@@ -53,7 +53,7 @@ jobs:
                   --name my-local-app \
                   -p 4000:80 \
                   --restart unless-stopped \
-                  fe-app-CI-CD:latest
+                  fe-app-ci-cd:latest
                 echo "Container started successfully"
 
             - name: Verify container is running
