@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './UsersList.css';
+import { getApiUrl } from '../utils/env';
 
 interface User {
   id: number;
@@ -16,7 +17,7 @@ const UsersList = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Lấy API URL từ biến môi trường, fallback về JSONPlaceholder
-  const API_URL = import.meta.env.VITE_API_URL || 'https://jsonplaceholder.typicode.com';
+  const API_URL = getApiUrl();
   const isJSONPlaceholder = API_URL.includes('jsonplaceholder.typicode.com');
 
   useEffect(() => {
