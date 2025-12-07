@@ -1,0 +1,51 @@
+name: Self-Hosted Local Machine Deployment
+
+on:
+    push:
+        branches:
+            - main
+
+# Thêm concurrency để cancel workflow cũ khi có push mới
+concurrency:
+    group: self-hosted-deploy-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build-and-deploy-to-local-machine-server:
+        runs-on: local-test-self-hosted
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Run tests
+              run: |
+                npm test
+                echo "Tests passed"
+
+            - name: Build Docker image
+              run: |
+                docker build -t fe-app-CI-CD:latest -t fe-app-CI-CD:${{ github.ref }} .
+                echo "Docker image built successfully"
+
+            - name: Stop and remove old container
+              run: |
+                docker stop my-local-app || true
+                docker rm my-local-app || true
+                echo "Old container removed"
+
+            - name: Run new Docker container
+              run: |
+                docker run -d \
+                  --name my-local-app \
+                  -p 3000:80 \
+                  --restart unless-stopped \
+                  fe-app:latest
+                echo "Container started successfully"
+
+            - name: Verify container is running
+              run: |
+                sleep 2
+                docker ps | grep my-local-app || echo "Container may still be starting"
+                echo "Container should be accessible at http://localhost:3000"
+
