@@ -13,6 +13,11 @@ concurrency:
 jobs:
     test_and_build_react_app:
         runs-on: ubuntu-latest
+        
+        # Set biến môi trường cho toàn bộ job
+        # Ưu tiên: GitHub Variables → fallback về giá trị mặc định
+        env:
+            VITE_API_URL: ${{ vars.VITE_API_URL || 'https://jsonplaceholder.typicode.com' }}
 
         steps:
             - name: Checkout repository
@@ -35,6 +40,7 @@ jobs:
 
             - name: build app
               run: |
+                echo "Building with API URL: $VITE_API_URL"
                 npm run build
                 echo "build passed"
 
