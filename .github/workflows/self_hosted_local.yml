@@ -38,7 +38,7 @@ jobs:
 
             - name: Build Docker image
               run: |
-                docker build -t fe-app-ci-cd:latest -t fe-app-ci-cd:${{ github.sha }} .
+                docker build --build-arg VITE_BASE_PATH=/ -t fe-app-ci-cd:latest -t fe-app-ci-cd:${{ github.sha }} .
                 echo "Docker image built successfully"
 
             - name: Stop and remove old container
