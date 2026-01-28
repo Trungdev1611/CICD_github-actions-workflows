@@ -1,0 +1,37 @@
+name: Hello World - Simple Test Workflow
+
+on: [push]
+
+concurrency:
+  group: hello-world-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  job_id_example_build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Notify checkout success
+        run: echo "checkout to branch successfully"
+
+      - name: Hello world message
+        run: echo "HelloWorld, I am learning Github action and CICD"
+
+      # 🔽 NEW: Setup Node.js (Newman cần Node)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # 🔽 NEW: Install Newman
+      - name: Install Newman
+        run: npm install -g newman
+
+      # 🔽 NEW: Run Postman API tests
+      - name: Run API Contract Tests
+        run: |
+          newman run collection_test.json \
+            --environment collection_test.json
