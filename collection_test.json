@@ -1,0 +1,146 @@
+{
+  "info": {
+    "_postman_id": "cba73309-9a45-4ab5-b209-dc70b7dbda39",
+    "name": "New Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "37037112"
+  },
+  "item": [
+    {
+      "name": "school",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const schema = {",
+              "  type: \"array\",",
+              "  items: {",
+              "    type: \"object\",",
+              "    required: [\"id\", \"email\", \"name\"],",
+              "    properties: {",
+              "      email: { type: \"string\" },",
+              "      name: { type: \"string\" }",
+              "    }",
+              "  }",
+              "};",
+              "",
+              "pm.test(\"Response matches API contract\", () => {",
+              "  pm.response.to.have.jsonSchema(schema);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://697987fecd4fe130e3dc0a85.mockapi.io/api/testing/testdata_response",
+          "protocol": "https",
+          "host": [
+            "697987fecd4fe130e3dc0a85",
+            "mockapi",
+            "io"
+          ],
+          "path": [
+            "api",
+            "testing",
+            "testdata_response"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "New Request",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-KEY",
+                "value": "mqJGZ2NjN38oUwCcQqWoD23hXottzsmH8gQc4d1F",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://admin.test-kbc.techbeans.info/admin/v1/schools?page=1&limit=20&sort=id&order=desc",
+              "protocol": "https",
+              "host": [
+                "admin",
+                "test-kbc",
+                "techbeans",
+                "info"
+              ],
+              "path": [
+                "admin",
+                "v1",
+                "schools"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "sort",
+                  "value": "id"
+                },
+                {
+                  "key": "order",
+                  "value": "desc"
+                }
+              ]
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Date",
+              "value": "Mon, 12 Aug 2024 01:48:43 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "61"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "x-amzn-RequestId",
+              "value": "5e37aae4-4592-4967-af02-01b93c43f24f"
+            },
+            {
+              "key": "x-amzn-Remapped-content-length",
+              "value": "61"
+            },
+            {
+              "key": "x-amz-apigw-id",
+              "value": "cX1_TEj7tjMFZdQ="
+            },
+            {
+              "key": "X-Amzn-Trace-Id",
+              "value": "Root=1-66b969fb-1c0c8ae8651cd4fe4b043c46;Parent=53644de2557cdc3f;Sampled=0;lineage=86f9fe9b:0"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"msg\": \"システム内部エラーが発生しました。\"\n}"
+        }
+      ]
+    }
+  ]
+}
